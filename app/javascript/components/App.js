@@ -10,9 +10,27 @@ import {
 } from 'react-router-dom'
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      apartments: []
+    }
+  }
+  componentDidMount(){
+    this.aptIndex()
+    }
+  aptIndex = () => {
+    fetch("http://localhost:3000/apartments")
+    .then(response => response.json())
+    .then(apartmentArray => this.setState({ apartments: apartmentArray}))
+    .catch(errors => console.log("index errors:", errors))
+  }
   render() {
+    console.log(this.state.apartments)
     const {
       logged_in,
+      current_user,
+      new_user_route,
       sign_in_route,
       sign_out_route
     } = this.props
@@ -25,7 +43,7 @@ class App extends Component {
         />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/apartmentIndex" component={ApartmentIndex}/>
+          <Route path="/apartmentIndex" render={ (props) => <ApartmentIndex apartment={ this.state.apartments } />} />
         </Switch>
       </Router>
     )
