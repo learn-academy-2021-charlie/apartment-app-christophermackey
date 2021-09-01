@@ -1,6 +1,51 @@
+/* color palette for app */
+.color1 {color: #122942;}
+.color2 {color: #17589d;}
+.color3 {color: #ea7049;}
+.color4 {color: #eccc5a;}
+.color5 {color: #f8efb4;}
+
 header {
-    display: flex;
-    justify-content: space-between;
-    background-color: #e0e093;
-    width: 100%
-  }
+  display: flex;
+  justify-content: space-between;
+  background-color: #eccc5a;
+  width: 96%;
+  padding: 10px;
+  border: 4px solid #122942
+}
+.home-gif{
+  display: flex;
+  justify-content: center;
+}
+.card {
+  text-align: center;
+  border: 4px solid #122942;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f8efb4
+}
+.show-font, .card-title{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.header-links{
+  text-align: right;
+}
+.footer{
+  width: auto;
+  height: 50px;
+  text-align: center;
+  background-color:  #eccc5a;
+  position:fixed;
+  left:0;
+  bottom:0;
+  right:0;
+}
+.footer-content{
+  color: #3c3c3b;
+}
+.btn{
+  background-color: #17589d;
+  color: whitesmoke;
+  border-radius: 5px;
+  padding: 10px;
+}
