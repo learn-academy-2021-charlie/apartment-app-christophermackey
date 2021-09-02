@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Card, CardTitle, Col, Button } from 'reactstrap'
+import { Card, CardTitle, Col } from 'reactstrap'
 
 class ApartmentIndex extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class ApartmentIndex extends Component {
     let { apartment } = this.props
     return (
       <>
-        <h3>Apartment Index</h3>
+        <h3>Apartments For Rent</h3>
         <Col id="form">
           {apartment.map(apartment => {
             return (
@@ -26,8 +26,10 @@ class ApartmentIndex extends Component {
               </Card>
             )
           })}
+          <br />
+          <br />
           <NavLink to="/">
-            <Button id="home-button">Home</Button>
+            <button className="btn">Home</button>
           </NavLink>
         </Col>
       </>
