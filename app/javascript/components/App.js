@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import ApartmentIndex from './pages/ApartmentIndex'
 import Home from './pages/Home'
 import AptShow from './pages/AptShow'
+import AptNew from './pages/AptNew'
 
 import {
   BrowserRouter as Router,
@@ -22,13 +23,24 @@ class App extends Component {
     this.aptIndex()
   }
   aptIndex = () => {
-    fetch("http://localhost:3000/apartments")
+    fetch("/apartments")
       .then(response => response.json())
       .then(apartmentArray => this.setState({ apartments: apartmentArray }))
       .catch(errors => console.log("index errors:", errors))
   }
+  createApartment = (newApartment) => {
+    fetch("/apartments", {
+      body: JSON.stringify(newApartment),
+      headers: {
+        "content-type": "application/json"
+      },
+      method: "POST"
+    })
+      .then(response => response.json())
+      .then(() => this.readApartment())
+      .catch(errors => console.log("apartment create errors:", errors))
+  }
   render() {
-    console.log(this.state.apartments)
     const {
       logged_in,
       current_user,
@@ -46,12 +58,17 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
 
-          <Route path="/apartmentIndex" render={(props) => <ApartmentIndex apartment={this.state.apartments} />} />
-
+          <Route path="/apartmentindex" render={(props) => {
+            return <ApartmentIndex apartments={this.state.apartments} />
+          }} />
           <Route path="/aptShow/:id" render={(props) => {
             let id = props.match.params.id
             let apartment = this.state.apartments.find(apartment => apartment.id === +id)
             return <AptShow apartment={apartment} />
+          }} />
+
+          <Route path="/aptNew" render={(props) => {
+            return <AptNew createApartment={this.createApartment} current_user={this.props.current_user} />
           }} />
         </Switch>
         <Footer />
